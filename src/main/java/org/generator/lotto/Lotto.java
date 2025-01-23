@@ -11,6 +11,7 @@ public class Lotto implements GenerateGuess {
 
     public Lotto(FileHandler fileHandler){this.fileHandler = fileHandler;}
 
+    @Override
     public int[] generateNumbers(){
         if(!setUnluckyNumbers(fileHandler.getUnluckyNumbers())){
             System.out.println("Fehler beim Setzen der Unglückszahlen. Die Zahlen müssen zwischen 1 und 49 sein.");
