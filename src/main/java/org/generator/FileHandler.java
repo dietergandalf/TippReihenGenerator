@@ -7,15 +7,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class FileHandler {
-    private static final Logger logger = Logger.getLogger(FileHandler.class.getName());
-    private String path;
+    protected static final Logger logger = Logger.getLogger(FileHandler.class.getName());
+    private final String path;
 
 
-    public FileHandler(){
-        //System.out.println("Wo möchtest du die Unglückszahlen speichern?");
-        //path = InputHandler.readInput();
-        path = ".";
-        path = path + "/unluckyNumbers.txt";
+    public FileHandler(String path){
+        this.path = path;
     }
 
     /**
@@ -41,6 +38,9 @@ public class FileHandler {
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Fehler beim Lesen der Datei.", e);
         }
+        if(data.isEmpty()) {
+            return data;
+        }
         data = data.substring(1, data.length() - 1);
         return data;
     }
@@ -51,6 +51,9 @@ public class FileHandler {
      **/
     public ArrayList<Integer> getUnluckyNumbers() {
         String data = readData();
+        if (data.isEmpty()) {
+            return new ArrayList<>();
+        }
         ArrayList<Integer> unluckyNumbers = new ArrayList<>();
         for(String number : data.split(", ")) {
             unluckyNumbers.add(Integer.parseInt(number));
@@ -86,5 +89,13 @@ public class FileHandler {
         // Remove all elements greater than 10
         unluckyNumbers.removeIf(n -> n > 10 || n < 1);
         return unluckyNumbers;
+    }
+
+    /**
+     * Delete the file
+     * @return true if the file was deleted
+     **/
+    public boolean deleteFile() {
+        return new java.io.File(path).delete();
     }
 }
