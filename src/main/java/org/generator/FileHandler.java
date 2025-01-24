@@ -10,12 +10,18 @@ public class FileHandler {
     private static final Logger logger = Logger.getLogger(FileHandler.class.getName());
     private String path;
 
+
     public FileHandler(){
-        System.out.println("Wo möchtest du die Unglückszahlen speichern?");
-        path = InputHandler.readInput();
+        //System.out.println("Wo möchtest du die Unglückszahlen speichern?");
+        //path = InputHandler.readInput();
+        path = ".";
         path = path + "/unluckyNumbers.txt";
     }
 
+    /**
+     * Save the unlucky numbers to a file
+     * @param data The unlucky numbers
+     **/
     public void saveData(String data) {
         try (FileWriter writer = new FileWriter(path)) {
             writer.write(data);
@@ -24,6 +30,10 @@ public class FileHandler {
         }
     }
 
+    /**
+     * Read the unlucky numbers from a file
+     * @return The saved data as a string
+     **/
     private String readData() {
         String data = "";
         try {
@@ -35,12 +45,46 @@ public class FileHandler {
         return data;
     }
 
+    /**
+     * Get the unlucky numbers from the file
+     * @return The unlucky numbers as an ArrayList
+     **/
     public ArrayList<Integer> getUnluckyNumbers() {
         String data = readData();
         ArrayList<Integer> unluckyNumbers = new ArrayList<>();
         for(String number : data.split(", ")) {
             unluckyNumbers.add(Integer.parseInt(number));
         }
+        return unluckyNumbers;
+    }
+
+    /**
+     * Get the unlucky numbers for the EuroLotto 5 of 50
+     * @return The unlucky numbers as an ArrayList
+     **/
+    public ArrayList<Integer> getUnluckyNumbers50(){
+        return getUnluckyNumbers();
+    }
+
+    /**
+     * Get the unlucky numbers for the Lotto 6 of 49
+     * @return The unlucky numbers up to 49 as an ArrayList
+     **/
+    public ArrayList<Integer> getUnluckyNumbers49(){
+        ArrayList<Integer> unluckyNumbers = getUnluckyNumbers();
+        // Remove all elements greater than 49
+        unluckyNumbers.removeIf(n -> n > 49 || n < 1);
+        return unluckyNumbers;
+    }
+
+    /**
+     * Get the unlucky numbers for the EuroLotto 2 of 10
+     * @return The unlucky numbers up to 10 as an ArrayList
+     **/
+    public ArrayList<Integer> getUnluckyNumbers10(){
+        ArrayList<Integer> unluckyNumbers = getUnluckyNumbers();
+        // Remove all elements greater than 10
+        unluckyNumbers.removeIf(n -> n > 10 || n < 1);
         return unluckyNumbers;
     }
 }

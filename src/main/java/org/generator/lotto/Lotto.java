@@ -5,15 +5,22 @@ import org.generator.FileHandler;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Class to generate the numbers for the Lotto
+ **/
 public class Lotto implements GenerateGuess {
     private final FileHandler fileHandler;
-    private ArrayList<Integer> numbersWithoutUnluckyNumbers = new ArrayList<>();
+    private final ArrayList<Integer> numbersWithoutUnluckyNumbers = new ArrayList<>();
 
     public Lotto(FileHandler fileHandler){this.fileHandler = fileHandler;}
 
+    /**
+     * Generate the numbers for the Lotto
+     * @return The generated numbers, 6 numbers between 1 and 49
+     **/
     @Override
     public int[] generateNumbers(){
-        if(!setUnluckyNumbers(fileHandler.getUnluckyNumbers())){
+        if(!setUnluckyNumbers()){
             System.out.println("Fehler beim Setzen der Unglückszahlen. Die Zahlen müssen zwischen 1 und 49 sein.");
             return new int[0];
         }
@@ -25,29 +32,17 @@ public class Lotto implements GenerateGuess {
         return Arrays.stream(numbers).sorted().toArray();
     }
 
-    private boolean checkUnluckyNumbers(ArrayList<Integer> unluckyNumbers) {
-        for(int unluckyNumber : unluckyNumbers) {
-            if(unluckyNumber < 1 || unluckyNumber > 49) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private boolean setUnluckyNumbers(ArrayList<Integer> unluckyNumbers) {
-        if(!checkUnluckyNumbers(unluckyNumbers)) {
-            return false;
-        }
+    /**
+     * Set the unlucky numbers
+     * @return true if the unlucky numbers are set;
+     **/
+    private boolean setUnluckyNumbers() {
+        ArrayList<Integer> unluckyNumbers = fileHandler.getUnluckyNumbers49();
         numbersWithoutUnluckyNumbers.clear();
         for(int i = 1; i <= 49; i++) {
             numbersWithoutUnluckyNumbers.add(i);
         }
-        try {
-            numbersWithoutUnluckyNumbers.removeAll(unluckyNumbers);
-        } catch (Exception e) {
-            System.out.println("Fehler beim Entfernen der Unglückszahlen. Die Zahlen dürfen nur einmal vorkommen und nur zwischen 1 und 49 sein.");
-        }
-
+        numbersWithoutUnluckyNumbers.removeAll(unluckyNumbers);
         return true;
     }
 }
