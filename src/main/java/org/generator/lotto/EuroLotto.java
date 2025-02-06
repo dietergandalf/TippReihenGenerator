@@ -4,13 +4,14 @@ import org.generator.FileHandler;
 
 import java.util.ArrayList;
 
-public class EuroLotto implements GenerateGuess{
+public class EuroLotto extends Lotto implements GenerateGuess{ // extend Lotto is not necessary but asked for
 
     public final FileHandler fileHandler;
     private final ArrayList<Integer> numbersWithoutUnluckyNumbers50 = new ArrayList<>();
     private final ArrayList<Integer> numbersWithoutUnluckyNumbers10 = new ArrayList<>();
 
     public EuroLotto(FileHandler fileHandler) {
+        super(fileHandler);
         this.fileHandler = fileHandler;
     }
 
