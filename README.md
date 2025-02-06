@@ -1,7 +1,5 @@
 <<<<<<< HEAD
 # TippReihenGenerator
-=======
-# TippReihenGenerator
 
 ## Übersicht
 
