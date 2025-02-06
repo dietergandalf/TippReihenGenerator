@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # TippReihenGenerator
 
 ## Übersicht
@@ -75,4 +74,3 @@ Mit n wird das Programm beendet.
 - Stellen Sie sicher, dass Java korrekt installiert ist.
 - Überprüfen Sie, ob Sie sich im richtigen Verzeichnis befinden.
 - Achten Sie auf die korrekte Schreibweise der Parameter.
->>>>>>> master
