@@ -40,10 +40,11 @@ jobs:
     # the publishing section of your build.gradle
     - name: Publish to GitHub Packages
       run: ./gradlew publish
-      run: ./gradlew scan
       env:
         USERNAME: ${{ github.actor }}
         TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Scan the created files
+      run: ./gradlew scan
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
       with:
