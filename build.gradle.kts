@@ -45,7 +45,7 @@ publishing {
             from(components["java"])
             groupId = project.group.toString()
             artifactId = "tippreihengenerator"
-            version = 1.0
+            version = "1.0"
         }
     }
 }
