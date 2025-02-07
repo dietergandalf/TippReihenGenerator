@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Class to handle the file saving and reading
+ **/
 public class FileHandler {
     protected static final Logger logger = Logger.getLogger(FileHandler.class.getName());
     private final String path;

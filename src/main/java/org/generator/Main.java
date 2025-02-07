@@ -16,7 +16,7 @@ import static org.generator.FileHandler.logger;
 public class Main {
     /**
      * Main method to start the program
-     * @param args The unlucky numbers
+     * @param args The unlucky numbers, euro for EuroLotto, delete to delete the unlucky numbers, help to show the help
      * **/
     public static void main(String[] args) {
         ArrayList<Integer> unluckyNumbers = new ArrayList<>();
@@ -95,6 +95,10 @@ public class Main {
         }
     }
 
+    /**
+     * Play the Lotto - generate the numbers and print them
+     * @param fileHandler The file handler to save the unlucky numbers
+     * **/
     private static void playLotto(FileHandler fileHandler){
         Lotto lotto = new Lotto(fileHandler);
         int[] numbers = lotto.generateNumbers();
@@ -104,6 +108,10 @@ public class Main {
         System.out.println("Dein Tipp für 6 aus 49: " + Arrays.toString(numbers));
     }
 
+    /**
+     * Play the EuroLotto - generate the numbers and print them
+     * @param fileHandler The file handler to save the unlucky numbers
+     * **/
     private static void playEuro(FileHandler fileHandler){
         EuroLotto euroLotto = new EuroLotto(fileHandler);
         int[] numbers = euroLotto.generateNumbers();
