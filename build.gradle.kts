@@ -33,16 +33,16 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/${github.repository}")
+            url = uri("https://maven.pkg.github.com/${project.property("github.repository")}")
             credentials {
-                username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
-                password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+                username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
+                password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
             }
         }
     }
     publications {
-        gpr(MavenPublication) {
-            from(components.java)
+        register<MavenPublication>("gpr") {
+            from(components["java"])
         }
     }
 }
